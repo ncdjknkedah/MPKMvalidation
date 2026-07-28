@@ -15,7 +15,8 @@
         .modul-3 { background-color: #ffebee; border-left: 5px solid #b71c1c; } /* Merah: Marah */
 
         .header-section { background-color: #0056b3; color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
-        .module-title { margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
+        .module-title { margin-top: 40px; margin-bottom: 15px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
+        .objective-box { background-color: #fff; border-left: 4px solid #6c757d; padding: 15px; margin-bottom: 25px; border-radius: 0 5px 5px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .question-card { padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .options-list { list-style-type: none; padding-left: 0; }
         .options-list li { background: rgba(255,255,255,0.6); margin-bottom: 8px; padding: 8px 12px; border-radius: 5px; border: 1px solid #ddd; }
@@ -23,7 +24,7 @@
         .scale-label { font-size: 0.85em; color: #555; }
         
         #main-content { display: none; }
-        .consent-card { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 6px solid #0056b3; }
+        .consent-card { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 6px solid #0056b3; }
         #loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; text-align: center; color: white; padding-top: 20vh; }
     </style>
 </head>
@@ -37,7 +38,7 @@
     </div>
 
     <div class="header-section">
-        <h1>Borang Pengesahan Kandungan & Muka (Content & Face Validation)</h1>
+        <h1>Borang Validasi Relevan dan Kejelasan Kandungan (Content & Face Validation)</h1>
         <p>Modul Interaktif Pembelajaran Kendiri Kesihatan Mental</p>
     </div>
 
@@ -46,15 +47,23 @@
         <!-- Seksyen Borang Persetujuan (Consent) -->
         <div id="consent-section" class="consent-card">
             <h3 class="text-center mb-4 text-primary">Borang Persetujuan Validator</h3>
-            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama kami melakukan proses validasi ini.</p>
-            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah berhasrat untuk membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul telah dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah.</p>
-            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kita berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak.</p>
+            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama melakukan proses validasi ini.</p>
+            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah sedang membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul sedang dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah. Berikut merupakan senarai dan objektif setiap modul:</p>
+            
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>1. MODUL PEMBELAJARAN PENGURUSAN ANXIETY:</strong> Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.</li>
+                <li class="list-group-item"><strong>2. PENGURUSAN KESIHATAN MENTAL DI TEMPAT KERJA:</strong> Modul ini bertujuan meningkatkan kesedaran, membasmi stigma, dan memupuk budaya kerja inklusif dalam kalangan warga kesihatan negeri Kedah.</li>
+                <li class="list-group-item"><strong>3. GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA:</strong> Bertujuan membendung dan menangani isu buli secara efektif, membina kapasiti sokongan psikososial, dan memastikan persekitaran kerja yang harmoni, profesional serta berdaya tahan.</li>
+                <li class="list-group-item"><strong>4. MODUL PENGURUSAN MARAH:</strong> Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.</li>
+            </ul>
+
+            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kami sedang berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak berpandukan objektif yang telah dinyatakan.</p>
             
             <div class="alert alert-warning mt-4">
                 <strong>Arahan Penilaian:</strong> Sila nilaikan setiap soalan berdasarkan dua kriteria (Skala 1 - 4):
                 <ul class="mb-0">
                     <li><strong>Relevan:</strong> Adakah soalan sesuai dan menepati objektif modul?</li>
-                    <li><strong>Kejelasan:</strong> Adakah bahasa dan pilihan jawapan mudah difahami oleh staf?</li>
+                    <li><strong>Kejelasan:</strong> Adakah penggunaan bahasa dan pilihan jawapan mudah difahami oleh anda?</li>
                 </ul>
             </div>
 
@@ -99,10 +108,11 @@
     </div>
 
     <script>
-        // Data Struktur Soalan
+        // Data Struktur Soalan & Objektif
         const modulesData = [
             {
-                title: "MODUL PEMBELAJARAN PENGURUSAN ANXIETY",
+                title: "1. MODUL PEMBELAJARAN PENGURUSAN ANXIETY",
+                objective: "Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.",
                 questions: [
                     { q: "Berapakah peratus orang dewasa di Malaysia yang terjejas oleh Anxiety berdasarkan NHMS 2019?", opts: ["A. 12.2%", "B. 20%", "C. 29%", "D. 50%"], ans: "C" },
                     { q: "Apakah perbezaan utama antara Stres dan Anxiety?", opts: ["A. Stres disebabkan faktor dalaman sahaja", "B. Anxiety ialah stres yang berterusan walaupun punca stres telah hilang", "C. Anxiety hanya berlaku kepada kanak-kanak", "D. Stres lebih teruk dari Anxiety"], ans: "B" },
@@ -117,7 +127,8 @@
                 ]
             },
             {
-                title: "MODUL KESIHATAN MENTAL DI TEMPAT KERJA",
+                title: "2. MODUL KESIHATAN MENTAL DI TEMPAT KERJA",
+                objective: "Modul ini bertujuan meningkatkan kesedaran, membasmi stigma, dan memupuk budaya kerja inklusif dalam kalangan warga kesihatan negeri Kedah.",
                 questions: [
                     { q: "Menurut Pertubuhan Kesihatan Sedunia (WHO), apakah definisi 'Kesihatan Mental'?", opts: ["A. Satu keadaan di mana seseorang tiada sebarang penyakit fizikal", "B. Satu keadaan di mana individu menyedari potensinya, boleh berdaya tindak terhadap stres, produktif dan boleh menyumbang kepada masyarakat", "C. Tahap kepintaran seseorang dalam menyelesaikan tugasan kerja yang rumit", "D. Keadaan emosi yang sentiasa gembira tanpa sebarang perasaan sedih"], ans: "B" },
                     { q: "Antara berikut, yang manakah ciri individu yang mempunyai kesihatan mental yang baik kerana 'Selesa dengan Diri Sendiri'?", opts: ["A. Sentiasa berasa was-was", "B. Suka memperbesar situasi yang remeh", "C. Mampu menerima kegagalan dan menghargai diri", "D. Mengasingkan diri dari rakan sekerja"], ans: "C" },
@@ -137,7 +148,8 @@
                 ]
             },
             {
-                title: "GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA",
+                title: "3. GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA",
+                objective: "Bertujuan membendung dan menangani isu buli secara efektif, membina kapasiti sokongan psikososial, dan memastikan persekitaran kerja yang harmoni, profesional serta berdaya tahan.",
                 questions: [
                     { q: "Menurut Jabatan Keselamatan dan Kesihatan Pekerjaan (2002), apakah definisi 'Buli' di tempat kerja?", opts: ["A. Satu bentuk teguran positif untuk meningkatkan prestasi", "B. Suatu bentuk gangguan psikologi atau kelakuan menindas secara kejam untuk mengaibkan pekerja", "C. Arahan kerja lebih masa yang diberikan oleh ketua jabatan", "D. Persaingan sihat antara rakan sekerja"], ans: "B" },
                     { q: "Buli boleh dibahagikan kepada 4 jenis utama mengikut Laporan HWCITF (2022). Antara berikut, yang manakah BUKAN jenis buli tersebut?", opts: ["A. Buli Fizikal", "B. Buli Lisan", "C. Buli Kewangan", "D. Buli Siber"], ans: "C" },
@@ -157,7 +169,8 @@
                 ]
             },
             {
-                title: "MODUL PENGURUSAN MARAH",
+                title: "4. MODUL PENGURUSAN MARAH",
+                objective: "Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.",
                 questions: [
                     { q: "Menurut konsep 'Gunung Ais Kemarahan' (Anger Iceberg), apakah sifat sebenar emosi marah?", opts: ["A. Ia adalah emosi tunggal yang tiada kaitan dengan emosi lain", "B. Ia adalah emosi primer yang paling kuat", "C. Ia adalah emosi sekunder yang menyembunyikan emosi lain seperti sedih atau takut", "D. Ia hanya berlaku kepada individu yang lemah mental"], ans: "C" },
                     { q: "Apakah kesan fisiologi jika seseorang berada dalam keadaan marah selama 1 minit?", opts: ["A. Melemahkan sistem imun badan selama 4-5 jam", "B. Menguatkan memori jangka panjang", "C. Menurunkan tekanan darah secara mendadak", "D. Merembeskan hormon gembira (serotonin)"], ans: "A" },
@@ -185,7 +198,16 @@
         // Render Soalan ke dalam HTML
         modulesData.forEach((mod, mIndex) => {
             let modClass = `modul-${mIndex}`;
-            let modHTML = `<h2 class="module-title mt-5 text-uppercase" style="color: #333;">${mod.title}</h2>`;
+            
+            // Masukkan Tajuk dan Objektif Modul di atas
+            let modHTML = `
+                <div class="mt-5 mb-4">
+                    <h2 class="module-title text-uppercase" style="color: #333;">${mod.title}</h2>
+                    <div class="objective-box">
+                        <strong class="text-primary">Objektif Modul:</strong> ${mod.objective}
+                    </div>
+                </div>
+            `;
             
             mod.questions.forEach((q, qIndex) => {
                 let optionsHTML = q.opts.map(opt => `<li>${opt}</li>`).join('');
@@ -293,7 +315,7 @@
             .then(data => {
                 document.getElementById('loading-overlay').style.display = 'none';
                 if(data.status === 'success') {
-                    alert('Terima kasih! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
+                    alert('Terima kasih atas penilaian anda! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
                     // Refresh borang
                     window.location.reload();
                 } else {
