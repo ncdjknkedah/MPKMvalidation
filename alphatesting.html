@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content & Face Validation: Modul Kesihatan Mental KKM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* Tema Warna Modul */
+        .modul-0 { background-color: #e3f2fd; border-left: 5px solid #0d47a1; } /* Biru: Anxiety */
+        .modul-1 { background-color: #e8f5e9; border-left: 5px solid #1b5e20; } /* Hijau: Tempat Kerja */
+        .modul-2 { background-color: #fffde7; border-left: 5px solid #f57f17; } /* Kuning: Buli */
+        .modul-3 { background-color: #ffebee; border-left: 5px solid #b71c1c; } /* Merah: Marah */
+
+        .header-section { background-color: #0056b3; color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .module-title { margin-top: 40px; margin-bottom: 15px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
+        .objective-box { background-color: #fff; border-left: 4px solid #6c757d; padding: 15px; margin-bottom: 25px; border-radius: 0 5px 5px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .question-card { padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .options-list { list-style-type: none; padding-left: 0; }
+        .options-list li { background: rgba(255,255,255,0.6); margin-bottom: 8px; padding: 8px 12px; border-radius: 5px; border: 1px solid #ddd; }
+        .ans-badge { background-color: #343a40; color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+        .scale-label { font-size: 0.85em; color: #555; }
+        
+        #main-content { display: none; }
+        .consent-card { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 6px solid #0056b3; }
+        #loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; text-align: center; color: white; padding-top: 20vh; }
+    </style>
+</head>
+<body>
+
+    <!-- Skrin Loading Semasa Hantar -->
+    <div id="loading-overlay">
+        <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
+        <h3 class="mt-3">Menghantar Maklum Balas Anda...</h3>
+        <p>Sila tunggu sebentar.</p>
+    </div>
+
+    <div class="header-section">
+        <h1>Borang Pengesahan Kandungan & Muka (Content & Face Validation)</h1>
+        <p>Modul Interaktif Pembelajaran Kendiri Kesihatan Mental</p>
+    </div>
+
+    <div class="container mb-5">
+        
+        <!-- Seksyen Borang Persetujuan (Consent) -->
+        <div id="consent-section" class="consent-card">
+            <h3 class="text-center mb-4 text-primary">Borang Persetujuan Validator</h3>
+            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama kami melakukan proses validasi ini.</p>
+            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah berhasrat untuk membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul telah dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah. Berikut merupakan senarai dan objektif setiap modul:</p>
+            
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>1. MODUL PEMBELAJARAN PENGURUSAN ANXIETY:</strong> Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.</li>
+                <li class="list-group-item"><strong>2. PENGURUSAN KESIHATAN MENTAL DI TEMPAT KERJA:</strong> Modul ini bertujuan meningkatkan kesedaran, membasmi stigma, dan memupuk budaya kerja inklusif dalam kalangan warga kesihatan negeri Kedah.</li>
+                <li class="list-group-item"><strong>3. GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA:</strong> Bertujuan membendung dan menangani isu buli secara efektif, membina kapasiti sokongan psikososial, dan memastikan persekitaran kerja yang harmoni, profesional serta berdaya tahan.</li>
+                <li class="list-group-item"><strong>4. MODUL PENGURUSAN MARAH:</strong> Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.</li>
+            </ul>
+
+            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kita berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak berpandukan objektif yang telah dinyatakan.</p>
+            
+            <div class="alert alert-warning mt-4">
+                <strong>Arahan Penilaian:</strong> Sila nilaikan setiap soalan berdasarkan dua kriteria (Skala 1 - 4):
+                <ul class="mb-0">
+                    <li><strong>Relevan:</strong> Adakah soalan sesuai dan menepati objektif modul?</li>
+                    <li><strong>Kejelasan:</strong> Adakah bahasa dan pilihan jawapan mudah difahami oleh staf?</li>
+                </ul>
+            </div>
+
+            <div class="text-center mt-4">
+                <button id="btnAgree" class="btn btn-success btn-lg px-5 py-3 shadow">Saya Faham & Bersetuju Untuk Mula</button>
+            </div>
+        </div>
+
+        <!-- Seksyen Borang Utama (Tersembunyi pada awalnya) -->
+        <div id="main-content">
+            <form id="validationForm">
+                
+                <!-- Maklumat Penilai -->
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-primary">Maklumat Penilai</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Nama Penuh:</label>
+                                <input type="text" class="form-control" id="evaluatorName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Jawatan:</label>
+                                <input type="text" class="form-control" id="evaluatorRole" placeholder="Cth: Pegawai Psikologi / Jururawat" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kontena Dinamik untuk Soalan -->
+                <div id="questionsContainer"></div>
+
+                <!-- Butang Hantar -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
+                        🚀 Hantar Maklum Balas ke Pangkalan Data
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Data Struktur Soalan & Objektif
+        const modulesData = [
+            {
+                title: "MODUL PEMBELAJARAN PENGURUSAN ANXIETY",
+                objective: "Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.",
+                questions: [
+                    { q: "Berapakah peratus orang dewasa di Malaysia yang terjejas oleh Anxiety berdasarkan NHMS 2019?", opts: ["A. 12.2%", "B. 20%", "C. 29%", "D. 50%"], ans: "C" },
+                    { q: "Apakah perbezaan utama antara Stres dan Anxiety?", opts: ["A. Stres disebabkan faktor dalaman sahaja", "B. Anxiety ialah stres yang berterusan walaupun punca stres telah hilang", "C. Anxiety hanya berlaku kepada kanak-kanak", "D. Stres lebih teruk dari Anxiety"], ans: "B" },
+                    { q: "Bahagian otak manakah yang bertanggungjawab terhadap emosi negatif dan mencetuskan respons 'lawan atau lari' (fight-or-flight)?", opts: ["A. Hippocampus", "B. Hypothalamus", "C. Amygdala", "D. Cerebellum"], ans: "C" },
+                    { q: "Antara berikut, manakah simptom FIZIKAL anxiety?", opts: ["A. Sukar fokus dan mudah lupa", "B. Mengelak dari bersosial", "C. Jantung berdebar laju, sesak nafas dan berpeluh", "D. Rasa putus asa"], ans: "C" },
+                    { q: "Apakah kesan jangka panjang Anxiety yang tidak diuruskan terhadap sistem imun tubuh?", opts: ["A. Sistem imun menjadi lebih kuat", "B. Penurunan fungsi sistem imun menyebabkan mudah dijangkiti penyakit", "C. Tiada kesan", "D. Tubuh kebal terhadap virus"], ans: "B" },
+                    { q: "Dalam Circle of Control (Bulatan Kawalan), manakah perkara yang BOLEH dikawal sepenuhnya oleh anda?", opts: ["A. Cuaca", "B. Pandangan orang lain terhadap anda", "C. Reaksi, sikap dan tindakan anda sendiri", "D. Keadaan ekonomi negara"], ans: "C" },
+                    { q: "Apakah tujuan utama Teknik Pernafasan Mendalam (Belly Breathing)?", opts: ["A. Menguatkan otot perut", "B. Mengurangkan tahap stres dan memperlahankan degupan jantung", "C. Meningkatkan tahap kortisol", "D. Membantu sistem pencernaan mencerna makanan dengan laju"], ans: "B" },
+                    { q: "Teknik Grounding 5-4-3-2-1 menggunakan lima deria manusia. Apakah deria untuk langkah PERTAMA (5 perkara)?", opts: ["A. Dengar", "B. Sentuh", "C. Lihat", "D. Hidu"], ans: "C" },
+                    { q: "Dalam teknik kesedaran (Mindfulness) A.W.A.R.E, huruf 'A' yang pertama bermaksud?", opts: ["A. Act (Bertindak segera)", "B. Accept (Terima pemikiran negatif tanpa melawan)", "C. Avoid (Mengelak dari masalah)", "D. Argue (Bahas dengan diri sendiri)"], ans: "B" },
+                    { q: "Teknik Relaksasi Progresif Otot melibatkan proses apa?", opts: ["A. Bersenam selama 30 minit", "B. Menegangkan otot tertentu seketika dan mengendurkannya perlahan-lahan", "C. Mengurut seluruh badan", "D. Tidur sekurang-kurangnya 8 jam"], ans: "B" }
+                ]
+            },
+            {
+                title: "MODUL KESIHATAN MENTAL DI TEMPAT KERJA",
+                objective: "Modul ini bertujuan meningkatkan kesedaran, membasmi stigma, dan memupuk budaya kerja inklusif dalam kalangan warga kesihatan negeri Kedah.",
+                questions: [
+                    { q: "Menurut Pertubuhan Kesihatan Sedunia (WHO), apakah definisi 'Kesihatan Mental'?", opts: ["A. Satu keadaan di mana seseorang tiada sebarang penyakit fizikal", "B. Satu keadaan di mana individu menyedari potensinya, boleh berdaya tindak terhadap stres, produktif dan boleh menyumbang kepada masyarakat", "C. Tahap kepintaran seseorang dalam menyelesaikan tugasan kerja yang rumit", "D. Keadaan emosi yang sentiasa gembira tanpa sebarang perasaan sedih"], ans: "B" },
+                    { q: "Antara berikut, yang manakah ciri individu yang mempunyai kesihatan mental yang baik kerana 'Selesa dengan Diri Sendiri'?", opts: ["A. Sentiasa berasa was-was", "B. Suka memperbesar situasi yang remeh", "C. Mampu menerima kegagalan dan menghargai diri", "D. Mengasingkan diri dari rakan sekerja"], ans: "C" },
+                    { q: "Apakah perbezaan utama di antara 'Masalah Kesihatan Mental' dan 'Penyakit Mental' mengikut Spektrum Kesihatan Mental?", opts: ["A. Masalah mental adalah gangguan fungsi otak, penyakit mental adalah gangguan emosi sementara", "B. Penyakit mental tidak boleh dirawat berbanding masalah mental", "C. Penyakit mental melibatkan gangguan fungsi otak dan menyebabkan gangguan ketara pemikiran/tingkah laku berbanding masalah mental yang bersifat sementara", "D. Tiada perbezaan, kedua-duanya adalah istilah yang sama"], ans: "C" },
+                    { q: "Menurut Tinjauan Kebangsaan Kesihatan & Morbiditi (NHMS) 2023, berapakah peratusan individu berumur 16 tahun ke atas yang mengalami kemurungan di Malaysia?", opts: ["A. 2.3% (500,000 individu)", "B. 4.6% (1,000,000 individu)", "C. 10% (3 juta individu)", "D. 15% penduduk Malaysia"], ans: "B" },
+                    { q: "Berikut merupakan MITOS (salah faham) berkaitan kesihatan mental, KECUALI:", opts: ["A. Penyakit mental boleh berjangkit seperti selesema", "B. Pesakit mental sentiasa agresif dan ganas", "C. Penyakit mental tidak boleh dirawat dan tidak akan sembuh", "D. Melalui program pemulihan, pesakit mental boleh kembali bekerja"], ans: "D" },
+                    { q: "Apakah yang dimaksudkan dengan 'Eustress'?", opts: ["A. Stres kronik yang menyebabkan kemurungan", "B. Stres fizikal yang menyebabkan penyakit jantung", "C. Stres positif yang memberikan motivasi dan membantu kita untuk lebih fokus", "D. Keletihan melampau akibat bebanan kerja"], ans: "C" },
+                    { q: "Punca stres terbahagi kepada punca luaran dan dalaman. Yang manakah antara berikut merupakan punca stres DALAMAN?", opts: ["A. Gangguan bunyi bising di pejabat", "B. Konflik dengan rakan sekerja", "C. Peristiwa penting seperti penceraian/kematian", "D. Pemikiran negatif (sempit) dan berasa diri tidak dihargai"], ans: "D" },
+                    { q: "Tanda-tanda stres boleh dilihat melalui beberapa aspek. Seseorang yang 'Merokok berlebihan dan menyalahguna dadah' menunjukkan tanda stres dari aspek?", opts: ["A. Fizikal", "B. Emosi", "C. Fikiran", "D. Tingkah laku"], ans: "D" },
+                    { q: "Apakah impak masalah kesihatan mental yang tidak diuruskan terhadap tempat kerja (organisasi)?", opts: ["A. Kadar produktiviti pekerja meningkat", "B. Peningkatan kadar ketidakhadiran (absenteeism) dan 'turn-over' pekerja", "C. Menjadikan suasana kerja lebih kondusif", "D. Mengurangkan kos pengurusan kesihatan syarikat"], ans: "B" },
+                    { q: "Berdasarkan Modul, terdapat 10 Tips Pengurusan Stres di Tempat Kerja. Manakah antara berikut BUKAN tips tersebut?", opts: ["A. Urus masa dengan baik", "B. Simpan dendam supaya tidak diulangi pihak lain", "C. Belajar teknik relaksasi yang berkesan", "D. Belajar cara berkomunikasi secara berkesan"], ans: "B" },
+                    { q: "Sebagai seorang PEKERJA, apakah peranan anda dalam pengurusan kesihatan mental di pejabat?", opts: ["A. Mengedarkan khabar angin jika ternampak rakan tertekan", "B. Menghakimi rakan yang kerap mengambil cuti sakit", "C. Menjadi pendengar yang baik dan hubungkan rakan dengan bantuan profesional", "D. Mengelak daripada membantu rakan yang kemurungan"], ans: "C" },
+                    { q: "Sebagai seorang MAJIKAN/PENGURUS, apakah tindakan yang TIDAK WAJAR dilakukan berkaitan kesihatan mental pekerja?", opts: ["A. Mengenal pasti pekerja yang mengalami tekanan emosi", "B. Mempromosikan budaya kerja yang inklusif dan menyokong", "C. Memaksa pekerja bekerja lebih masa setiap hari tanpa mengira tahap stres", "D. Memimpin melalui teladan yang baik (Lead by example)"], ans: "C" },
+                    { q: "Dalam Kempen Kesihatan Mental KKM, apakah maksud huruf 'T' di dalam akronim 'Let's TALK'?", opts: ["A. Take medication daily", "B. Tell someone you trust about your problems", "C. Think positively always", "D. Try to forget the pain"], ans: "B" },
+                    { q: "Apakah inisiatif utama (Intervensi) yang disediakan bagi sokongan pemulihan kerjaya pesakit mental?", opts: ["A. Pembuangan kerja serta-merta", "B. Program Return-to-Work dan penempatan kerja yang sesuai", "C. Pemotongan gaji kerana tidak hadir", "D. Pengasingan sepenuhnya dari staf lain"], ans: "B" },
+                    { q: "Sekiranya anda atau rakan memerlukan bantuan emosi yang mendesak, apakah Talian Bantuan Krisis Kesihatan Mental Kebangsaan yang boleh dihubungi?", opts: ["A. Talian Kecemasan 999", "B. Biro Pengaduan Awam", "C. Talian KASIH 15999", "D. Talian HEAL 15555"], ans: "D" }
+                ]
+            },
+            {
+                title: "GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA",
+                objective: "Bertujuan membendung dan menangani isu buli secara efektif, membina kapasiti sokongan psikososial, dan memastikan persekitaran kerja yang harmoni, profesional serta berdaya tahan.",
+                questions: [
+                    { q: "Menurut Jabatan Keselamatan dan Kesihatan Pekerjaan (2002), apakah definisi 'Buli' di tempat kerja?", opts: ["A. Satu bentuk teguran positif untuk meningkatkan prestasi", "B. Suatu bentuk gangguan psikologi atau kelakuan menindas secara kejam untuk mengaibkan pekerja", "C. Arahan kerja lebih masa yang diberikan oleh ketua jabatan", "D. Persaingan sihat antara rakan sekerja"], ans: "B" },
+                    { q: "Buli boleh dibahagikan kepada 4 jenis utama mengikut Laporan HWCITF (2022). Antara berikut, yang manakah BUKAN jenis buli tersebut?", opts: ["A. Buli Fizikal", "B. Buli Lisan", "C. Buli Kewangan", "D. Buli Siber"], ans: "C" },
+                    { q: "Mengasingkan seseorang daripada kumpulan, menyebarkan khabar angin, dan merosakkan reputasi adalah contoh bagi?", opts: ["A. Buli Siber", "B. Buli Psikologi", "C. Buli Fizikal", "D. Buli Lisan"], ans: "B" },
+                    { q: "Apakah singkatan bagi PYDM dalam garis panduan ini?", opts: ["A. Pegawai Yang Diberhentikan Majikan", "B. Pusat Yang Diuruskan Menteri", "C. Pegawai Yang Disyaki Mengganggu", "D. Pengurusan Yang Dinilai Membuli"], ans: "C" },
+                    { q: "Antara kesan FIZIKAL buli kepada mangsa adalah:", opts: ["A. Hilang keyakinan diri", "B. Keletihan melampau, insomnia dan masalah gastrik", "C. Produktiviti organisasi menurun", "D. Kemurungan kronik"], ans: "B" },
+                    { q: "Berikut merupakan kesan buli kepada ORGANISASI, kecuali:", opts: ["A. Kadar ketidakhadiran dan cuti sakit meningkat", "B. Reputasi organisasi terjejas", "C. Persekitaran kerja menjadi toksik", "D. Peningkatan semangat kerjasama (team building)"], ans: "D" },
+                    { q: "Apakah saluran/platform rasmi utama Kementerian Kesihatan Malaysia untuk melaporkan kes buli yang dikendalikan oleh Unit Integriti?", opts: ["A. Aplikasi WhatsApp Ketua Jabatan", "B. Sistem MyHELP", "C. Biro Pengaduan Awam (BPA)", "D. Talian Kecemasan 999"], ans: "B" },
+                    { q: "Berapakah tempoh penyelesaian sasaran bagi aduan buli Kategori Biasa melalui Sistem MyHELP?", opts: ["A. 7 hari bekerja", "B. 15 hari bekerja", "C. 30 hari bekerja", "D. 1 bulan kalendar"], ans: "B" },
+                    { q: "Siapakah yang bertanggungjawab untuk menyaring dan menyemak aduan buli yang diterima melalui sistem MyHELP?", opts: ["A. Ketua Jabatan", "B. Unit Integriti", "C. Pegawai Psikologi", "D. Pakar Psikiatri"], ans: "B" },
+                    { q: "Sekiranya aduan buli disalurkan melalui SISPAA (bukan MyHELP), siapakah yang akan dipertanggungjawabkan untuk melantik Jawatankuasa Siasatan?", opts: ["A. Ketua Jabatan", "B. Ketua Polis Negara", "C. Unit Komunikasi Korporat (UKK)", "D. Pengadu sendiri"], ans: "A" },
+                    { q: "Apakah peranan utama Pegawai Psikologi apabila mangsa buli dirujuk kepadanya?", opts: ["A. Menghukum pembuli (PYDM)", "B. Mengenal pasti tahap kesan emosi mangsa dan memberikan intervensi/kaunseling", "C. Mencari bukti bergambar kejadian buli", "D. Menyediakan surat pertukaran tempat kerja"], ans: "B" },
+                    { q: "Kempen Anti-Buli di Tempat Kerja KKM disambut pada?", opts: ["A. Isnin minggu pertama bulan Oktober setiap tahun", "B. 1 Januari setiap tahun", "C. Isnin minggu terakhir bulan Disember", "D. 31 Ogos setiap tahun"], ans: "A" },
+                    { q: "Antara HAK anggota KKM mengenai isu buli adalah:", opts: ["A. Melaporkan insiden buli tanpa rasa takut akan tindakan balas", "B. Membuli balik individu yang menyakiti mereka", "C. Menyebarkan maklumat siasatan di media sosial", "D. Menyimpan dendam tanpa membuat aduan rasmi"], ans: "A" },
+                    { q: "Jika Jawatankuasa Siasatan mendapati kes buli berasas, apakah langkah yang perlu diambil ke atas PYDM (Pembuli)?", opts: ["A. Dinaikkan pangkat", "B. Diberhentikan kerja serta merta", "C. Dilaporkan kepada Pihak Berkuasa Tatatertib dan dirujuk untuk kaunseling", "D. Diberi cuti rehat khas sebulan"], ans: "C" },
+                    { q: "Mengikut senarai tanggungjawab, siapa yang perlu 'mewujudkan polisi anti-buli di peringkat jabatan dan mewujudkan persekitaran yang selamat'?", opts: ["A. Pihak Pengurusan / Organisasi", "B. Saksi Kejadian", "C. Pengawal Keselamatan", "D. Pesakit di Hospital"], ans: "A" }
+                ]
+            },
+            {
+                title: "MODUL PENGURUSAN MARAH",
+                objective: "Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.",
+                questions: [
+                    { q: "Menurut konsep 'Gunung Ais Kemarahan' (Anger Iceberg), apakah sifat sebenar emosi marah?", opts: ["A. Ia adalah emosi tunggal yang tiada kaitan dengan emosi lain", "B. Ia adalah emosi primer yang paling kuat", "C. Ia adalah emosi sekunder yang menyembunyikan emosi lain seperti sedih atau takut", "D. Ia hanya berlaku kepada individu yang lemah mental"], ans: "C" },
+                    { q: "Apakah kesan fisiologi jika seseorang berada dalam keadaan marah selama 1 minit?", opts: ["A. Melemahkan sistem imun badan selama 4-5 jam", "B. Menguatkan memori jangka panjang", "C. Menurunkan tekanan darah secara mendadak", "D. Merembeskan hormon gembira (serotonin)"], ans: "A" },
+                    { q: "Bahagian otak manakah yang berfungsi memproses emosi dan secara langsung mencetuskan perasaan marah?", opts: ["A. Cerebellum", "B. Amygdala", "C. Hippocampus", "D. Korteks Prefrontal"], ans: "B" },
+                    { q: "Antara berikut, yang manakah BUKAN punca yang boleh mencetuskan kemarahan (Press Button)?", opts: ["A. Rasa terancam, dibuli atau dihina", "B. Diri tidak diterima atau tidak dihargai", "C. Mengambil masa rehat yang cukup dan berkualiti", "D. Dinasihati tanpa diminta"], ans: "C" },
+                    { q: "Dalam konsep Lampu Isyarat Pengurusan Marah, warna KUNING membawa maksud apa?", opts: ["A. Bergerak dan bertindak segera", "B. Berhenti, katakan STOP pada diri", "C. Bersedia, akui perasaan dan kenalpasti punca marah", "D. Lari dari masalah"], ans: "C" },
+                    { q: "Apakah tujuan utama Teknik 'Distraction' (Mengalih Perhatian) ketika marah?", opts: ["A. Untuk membalas dendam dalam diam", "B. Untuk melupakan marah seketika dan menenangkan gelombang otak", "C. Untuk mencari kesalahan orang lain", "D. Untuk menyimpan dendam supaya boleh diluahkan kelak"], ans: "B" },
+                    { q: "Bagaimanakah cara yang betul untuk meluahkan kemarahan menggunakan teknik komunikasi asertif?", opts: ["A. Menggunakan kata-kata kesat untuk kepuasan", "B. Menyalahkan orang lain dengan ayat bermula dengan 'Awak...'", "C. Menggunakan mesej 'Saya' (I-Message) untuk menyatakan perasaan tanpa menyalahkan pihak lain", "D. Mendiamkan diri seribu bahasa (Silent Treatment)"], ans: "C" },
+                    { q: "Teknik pernafasan 'Square Breathing' yang membantu mengawal kemarahan melibatkan formula kiraan masa. Apakah formula tersebut?", opts: ["A. 4 saat tarik nafas, 2 saat tahan, 8 saat hembus", "B. 4 saat tarik nafas, 4 saat tahan, 4 saat hembus, 4 saat tahan", "C. 10 saat tarik nafas, hembus serta-merta", "D. Tarik nafas selaju mungkin selama 1 minit"], ans: "B" },
+                    { q: "Apakah yang dimaksudkan dengan konsep 'Kalis Diri' (Self-talk) dalam memperkasakan mental?", opts: ["A. Menganggap diri sendiri sentiasa betul dan sempurna", "B. Meyakinkan diri bahawa tiada siapa berani memarahi kita", "C. Menyediakan minda untuk sentiasa bersedia menerima teguran/kemarahan orang lain secara rasional", "D. Mengasingkan diri dari masyarakat sepenuhnya"], ans: "C" },
+                    { q: "Dari perspektif Islam, apakah tindakan fizikal yang disarankan oleh Nabi SAW apabila seseorang berasa marah ketika sedang berdiri?", opts: ["A. Terus berjalan pantas meninggalkan tempat tersebut", "B. Duduk, dan jika masih marah, berbaring", "C. Membalas balik dengan hujah yang kuat", "D. Menahan nafas selama yang mampu"], ans: "B" }
+                ]
+            }
+        ];
+
+        // Navigasi Persetujuan
+        document.getElementById('btnAgree').addEventListener('click', function() {
+            document.getElementById('consent-section').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        });
+
+        const container = document.getElementById('questionsContainer');
+        let questionDataMap = []; // Untuk simpan meta-data bagi submission
+
+        // Render Soalan ke dalam HTML
+        modulesData.forEach((mod, mIndex) => {
+            let modClass = `modul-${mIndex}`;
+            
+            // Masukkan Tajuk dan Objektif Modul di atas
+            let modHTML = `
+                <div class="mt-5 mb-4">
+                    <h2 class="module-title text-uppercase" style="color: #333;">${mod.title}</h2>
+                    <div class="objective-box">
+                        <strong class="text-primary">Objektif Modul:</strong> ${mod.objective}
+                    </div>
+                </div>
+            `;
+            
+            mod.questions.forEach((q, qIndex) => {
+                let optionsHTML = q.opts.map(opt => `<li>${opt}</li>`).join('');
+                let qId = `mod${mIndex}_q${qIndex}`;
+                
+                // Simpan rujukan untuk API penghantaran
+                questionDataMap.push({ id: qId, modul: mod.title, soalan: `Soalan ${qIndex + 1}: ${q.q}` });
+                
+                modHTML += `
+                <div class="question-card ${modClass}">
+                    <h5 class="fw-bold">Soalan ${qIndex + 1}</h5>
+                    <p class="mb-2 fw-medium">${q.q}</p>
+                    <ul class="options-list">
+                        ${optionsHTML}
+                    </ul>
+                    <p><span class="ans-badge">Jawapan: ${q.ans}</span></p>
+                    
+                    <hr class="mt-4 mb-4" style="border-color: rgba(0,0,0,0.1);">
+                    <div class="row">
+                        <!-- Skala Relevan -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold mb-1">Skala Relevan (1-4):</label><br>
+                            <span class="scale-label d-block mb-2">1 = Tdk Relevan, 4 = Sgt Relevan</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="1" required> <label class="form-check-label">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="2"> <label class="form-check-label">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="3" checked> <label class="form-check-label">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="4"> <label class="form-check-label">4</label>
+                            </div>
+                        </div>
+
+                        <!-- Skala Kejelasan -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold mb-1">Skala Kejelasan (1-4):</label><br>
+                            <span class="scale-label d-block mb-2">1 = Tdk Jelas, 4 = Sgt Jelas</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="1" required> <label class="form-check-label">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="2"> <label class="form-check-label">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="3" checked> <label class="form-check-label">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="4"> <label class="form-check-label">4</label>
+                            </div>
+                        </div>
+
+                        <!-- Komen / Cadangan -->
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-bold mb-1">Komen / Cadangan:</label>
+                            <textarea class="form-control form-control-sm" name="${qId}_komen" rows="2" placeholder="Sila nyatakan jika ada cadangan..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML += modHTML;
+        });
+
+        // -------------------------------------------------------------
+        // PENTING: Gantikan URL di bawah dengan 'Web app URL' GAS anda
+        // -------------------------------------------------------------
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwAe0dIeolPGJBrkPonGa8UnaRneLf2D_KMVKcsqFhuUs0qxhH7R0CsBgM1OPcROcNt/exec';
+
+        document.getElementById('validationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Tunjuk overlay loading
+            document.getElementById('loading-overlay').style.display = 'block';
+
+            let formData = new FormData(this);
+            let payload = {
+                nama: document.getElementById('evaluatorName').value,
+                jawatan: document.getElementById('evaluatorRole').value,
+                responses: []
+            };
+
+            // Kumpul semua jawapan berdasarkan peta soalan (questionDataMap)
+            questionDataMap.forEach(qData => {
+                payload.responses.push({
+                    modul: qData.modul,
+                    soalan: qData.soalan,
+                    relevan: formData.get(`${qData.id}_relevan`),
+                    jelas: formData.get(`${qData.id}_jelas`),
+                    komen: formData.get(`${qData.id}_komen`) || ""
+                });
+            });
+
+            // Hantar ke Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                // Guna text/plain untuk mengelakkan isu CORS preflight
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                if(data.status === 'success') {
+                    alert('Terima kasih! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
+                    // Refresh borang
+                    window.location.reload();
+                } else {
+                    alert('Ralat semasa menghantar. Sila hubungi urusetia.');
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                alert('Terdapat masalah rangkaian atau pautan Google Apps Script tidak tepat. Sila pastikan anda telah meletakkan URL yang betul pada fail index.html.');
+                console.error('Error!', error.message);
+            });
+        });
+    </script>
+</body>
+</html>
