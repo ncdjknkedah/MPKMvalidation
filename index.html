@@ -344,7 +344,7 @@
         // -------------------------------------------------------------
         // URL Google Apps Script
         // -------------------------------------------------------------
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwI0SLkJxDC5phEC0S7JX-7hyRlL9-KxJniEA5x0aUMhPOV5m8zybUmVxY0cGDzDb4SuA/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyMsmVI4l_oN_ovxngYtqQtKC3OCZGS60yUjQ6ax24ZC94Lx5bEKJv13u9dSKNuag7C6g/exec';
 
         document.getElementById('validationForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -370,11 +370,12 @@
                 });
             });
 
-            // Hantar ke Google Apps Script
+// Hantar ke Google Apps Script
             fetch(scriptURL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                redirect: "follow" // <--- Tambah baris ini
             })
             .then(response => response.json())
             .then(data => {
