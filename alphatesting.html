@@ -38,7 +38,7 @@
     </div>
 
     <div class="header-section">
-        <h1>Borang Pengesahan Kandungan & Muka (Content & Face Validation)</h1>
+        <h1>Borang Validasi Relevan dan Kejelasan Kandungan (Content & Face Validation)</h1>
         <p>Modul Interaktif Pembelajaran Kendiri Kesihatan Mental</p>
     </div>
 
@@ -47,8 +47,8 @@
         <!-- Seksyen Borang Persetujuan (Consent) -->
         <div id="consent-section" class="consent-card">
             <h3 class="text-center mb-4 text-primary">Borang Persetujuan Validator</h3>
-            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama kami melakukan proses validasi ini.</p>
-            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah berhasrat untuk membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul telah dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah. Berikut merupakan senarai dan objektif setiap modul:</p>
+            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama melakukan proses validasi ini.</p>
+            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah sedang membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul sedang dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah. Berikut merupakan senarai dan objektif setiap modul:</p>
             
             <ul class="list-group mb-4">
                 <li class="list-group-item"><strong>1. MODUL PEMBELAJARAN PENGURUSAN ANXIETY:</strong> Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.</li>
@@ -57,13 +57,13 @@
                 <li class="list-group-item"><strong>4. MODUL PENGURUSAN MARAH:</strong> Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.</li>
             </ul>
 
-            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kita berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak berpandukan objektif yang telah dinyatakan.</p>
+            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kami sedang berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak berpandukan objektif yang telah dinyatakan.</p>
             
             <div class="alert alert-warning mt-4">
                 <strong>Arahan Penilaian:</strong> Sila nilaikan setiap soalan berdasarkan dua kriteria (Skala 1 - 4):
                 <ul class="mb-0">
                     <li><strong>Relevan:</strong> Adakah soalan sesuai dan menepati objektif modul?</li>
-                    <li><strong>Kejelasan:</strong> Adakah bahasa dan pilihan jawapan mudah difahami oleh staf?</li>
+                    <li><strong>Kejelasan:</strong> Adakah penggunaan bahasa dan pilihan jawapan mudah difahami oleh anda?</li>
                 </ul>
             </div>
 
@@ -111,7 +111,7 @@
         // Data Struktur Soalan & Objektif
         const modulesData = [
             {
-                title: "MODUL PEMBELAJARAN PENGURUSAN ANXIETY",
+                title: "1. MODUL PEMBELAJARAN PENGURUSAN ANXIETY",
                 objective: "Membantu anda memahami Anxiety (Kebimbangan), kesan-kesannya terhadap fisiologi tubuh, serta menguasai teknik praktikal untuk mengurus emosi dengan berkesan.",
                 questions: [
                     { q: "Berapakah peratus orang dewasa di Malaysia yang terjejas oleh Anxiety berdasarkan NHMS 2019?", opts: ["A. 12.2%", "B. 20%", "C. 29%", "D. 50%"], ans: "C" },
@@ -127,7 +127,7 @@
                 ]
             },
             {
-                title: "MODUL KESIHATAN MENTAL DI TEMPAT KERJA",
+                title: "2. MODUL KESIHATAN MENTAL DI TEMPAT KERJA",
                 objective: "Modul ini bertujuan meningkatkan kesedaran, membasmi stigma, dan memupuk budaya kerja inklusif dalam kalangan warga kesihatan negeri Kedah.",
                 questions: [
                     { q: "Menurut Pertubuhan Kesihatan Sedunia (WHO), apakah definisi 'Kesihatan Mental'?", opts: ["A. Satu keadaan di mana seseorang tiada sebarang penyakit fizikal", "B. Satu keadaan di mana individu menyedari potensinya, boleh berdaya tindak terhadap stres, produktif dan boleh menyumbang kepada masyarakat", "C. Tahap kepintaran seseorang dalam menyelesaikan tugasan kerja yang rumit", "D. Keadaan emosi yang sentiasa gembira tanpa sebarang perasaan sedih"], ans: "B" },
@@ -148,7 +148,7 @@
                 ]
             },
             {
-                title: "GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA",
+                title: "3. GARIS PANDUAN PENGURUSAN BULI DI TEMPAT KERJA",
                 objective: "Bertujuan membendung dan menangani isu buli secara efektif, membina kapasiti sokongan psikososial, dan memastikan persekitaran kerja yang harmoni, profesional serta berdaya tahan.",
                 questions: [
                     { q: "Menurut Jabatan Keselamatan dan Kesihatan Pekerjaan (2002), apakah definisi 'Buli' di tempat kerja?", opts: ["A. Satu bentuk teguran positif untuk meningkatkan prestasi", "B. Suatu bentuk gangguan psikologi atau kelakuan menindas secara kejam untuk mengaibkan pekerja", "C. Arahan kerja lebih masa yang diberikan oleh ketua jabatan", "D. Persaingan sihat antara rakan sekerja"], ans: "B" },
@@ -169,7 +169,7 @@
                 ]
             },
             {
-                title: "MODUL PENGURUSAN MARAH",
+                title: "4. MODUL PENGURUSAN MARAH",
                 objective: "Membantu anda memahami psikologi Kemarahan, kesan destruktifnya kepada kesihatan tubuh, serta menguasai teknik praktikal untuk menjinakkan emosi dengan bijak dan profesional.",
                 questions: [
                     { q: "Menurut konsep 'Gunung Ais Kemarahan' (Anger Iceberg), apakah sifat sebenar emosi marah?", opts: ["A. Ia adalah emosi tunggal yang tiada kaitan dengan emosi lain", "B. Ia adalah emosi primer yang paling kuat", "C. Ia adalah emosi sekunder yang menyembunyikan emosi lain seperti sedih atau takut", "D. Ia hanya berlaku kepada individu yang lemah mental"], ans: "C" },
@@ -315,7 +315,7 @@
             .then(data => {
                 document.getElementById('loading-overlay').style.display = 'none';
                 if(data.status === 'success') {
-                    alert('Terima kasih! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
+                    alert('Terima kasih atas penilaian anda! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
                     // Refresh borang
                     window.location.reload();
                 } else {
