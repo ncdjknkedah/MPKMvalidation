@@ -3,66 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content & Face Validation: Modul Kesihatan Mental</title>
-    <!-- Bootstrap CSS untuk reka bentuk yang kemas dan responsif -->
+    <title>Content & Face Validation: Modul Kesihatan Mental KKM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* Tema Warna Modul */
+        .modul-0 { background-color: #e3f2fd; border-left: 5px solid #0d47a1; } /* Biru: Anxiety */
+        .modul-1 { background-color: #e8f5e9; border-left: 5px solid #1b5e20; } /* Hijau: Tempat Kerja */
+        .modul-2 { background-color: #fffde7; border-left: 5px solid #f57f17; } /* Kuning: Buli */
+        .modul-3 { background-color: #ffebee; border-left: 5px solid #b71c1c; } /* Merah: Marah */
+
         .header-section { background-color: #0056b3; color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
-        .module-title { color: #0056b3; margin-top: 40px; margin-bottom: 20px; border-bottom: 3px solid #0056b3; padding-bottom: 10px; font-weight: bold; }
-        .question-card { background: white; padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #0056b3; }
+        .module-title { margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
+        .question-card { padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .options-list { list-style-type: none; padding-left: 0; }
-        .options-list li { background: #f8f9fa; margin-bottom: 8px; padding: 8px 12px; border-radius: 5px; border: 1px solid #e9ecef; }
-        .ans-badge { background-color: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
-        .scale-label { font-size: 0.85em; color: #6c757d; }
+        .options-list li { background: rgba(255,255,255,0.6); margin-bottom: 8px; padding: 8px 12px; border-radius: 5px; border: 1px solid #ddd; }
+        .ans-badge { background-color: #343a40; color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+        .scale-label { font-size: 0.85em; color: #555; }
+        
+        #main-content { display: none; }
+        .consent-card { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 6px solid #0056b3; }
+        #loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; text-align: center; color: white; padding-top: 20vh; }
     </style>
 </head>
 <body>
 
-    <div class="header-section">
-        <h1>Borang Pengesahan Kandungan & Muka</h1>
-        <p>Penilaian Ujian Pra & Pasca: Modul Kesihatan Mental KKM</p>
+    <!-- Skrin Loading Semasa Hantar -->
+    <div id="loading-overlay">
+        <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
+        <h3 class="mt-3">Menghantar Maklum Balas Anda...</h3>
+        <p>Sila tunggu sebentar.</p>
     </div>
 
-    <div class="container">
-        <div class="alert alert-info">
-            <strong>Arahan kepada Penilai (Validator):</strong> Sila nilaikan setiap soalan berdasarkan dua kriteria (Skala 1 - 4):<br>
-            <ul>
-                <li><strong>Relevan:</strong> Adakah soalan ini sesuai dan mengukur objektif modul? (1 = Sangat Tidak Relevan, 4 = Sangat Relevan)</li>
-                <li><strong>Kejelasan:</strong> Adakah bahasa, laras, dan pilihan jawapan mudah difahami? (1 = Sangat Tidak Jelas, 4 = Sangat Jelas)</li>
-            </ul>
-            Tinggalkan komen sekiranya anda memilih skala 1 atau 2, atau jika ada cadangan pembaikan. Setelah selesai, klik butang "Muat Turun Hasil (CSV)" di bahagian bawah.
+    <div class="header-section">
+        <h1>Borang Pengesahan Kandungan & Muka (Content & Face Validation)</h1>
+        <p>Modul Interaktif Pembelajaran Kendiri Kesihatan Mental</p>
+    </div>
+
+    <div class="container mb-5">
+        
+        <!-- Seksyen Borang Persetujuan (Consent) -->
+        <div id="consent-section" class="consent-card">
+            <h3 class="text-center mb-4 text-primary">Borang Persetujuan Validator</h3>
+            <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama kami melakukan proses validasi ini.</p>
+            <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah berhasrat untuk membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul telah dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah.</p>
+            <p><strong>Tujuan Validasi:</strong> Setiap modul didatangkan dengan soalan Pra (Pre) dan Pasca (Post). Pada masa ini, kita berada di fasa <em>Face and Content Validation</em>. Kami memohon kerjasama dan kepakaran anda untuk memberikan pandangan serta menilai kebolehpercayaan soalan-soalan ini untuk mengukur pengetahuan staf kelak.</p>
+            
+            <div class="alert alert-warning mt-4">
+                <strong>Arahan Penilaian:</strong> Sila nilaikan setiap soalan berdasarkan dua kriteria (Skala 1 - 4):
+                <ul class="mb-0">
+                    <li><strong>Relevan:</strong> Adakah soalan sesuai dan menepati objektif modul?</li>
+                    <li><strong>Kejelasan:</strong> Adakah bahasa dan pilihan jawapan mudah difahami oleh staf?</li>
+                </ul>
+            </div>
+
+            <div class="text-center mt-4">
+                <button id="btnAgree" class="btn btn-success btn-lg px-5 py-3 shadow">Saya Faham & Bersetuju Untuk Mula</button>
+            </div>
         </div>
 
-        <form id="validationForm">
-            <!-- Maklumat Penilai -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">Maklumat Penilai</h4>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nama Penuh:</label>
-                            <input type="text" class="form-control" id="evaluatorName" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Jawatan / Kepakaran:</label>
-                            <input type="text" class="form-control" id="evaluatorRole" required>
+        <!-- Seksyen Borang Utama (Tersembunyi pada awalnya) -->
+        <div id="main-content">
+            <form id="validationForm">
+                
+                <!-- Maklumat Penilai -->
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-primary">Maklumat Penilai</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Nama Penuh:</label>
+                                <input type="text" class="form-control" id="evaluatorName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Jawatan:</label>
+                                <input type="text" class="form-control" id="evaluatorRole" placeholder="Cth: Pegawai Psikologi / Jururawat" required>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Kontena Dinamik untuk Soalan -->
-            <div id="questionsContainer"></div>
+                <!-- Kontena Dinamik untuk Soalan -->
+                <div id="questionsContainer"></div>
 
-            <!-- Butang Hantar/Muat Turun -->
-            <div class="text-center mt-5 mb-5">
-                <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
-                    💾 Simpan & Muat Turun Hasil (CSV)
-                </button>
-                <p class="mt-2 text-muted small">Sila hantar fail CSV yang dimuat turun kepada urusetia modul.</p>
-            </div>
-        </form>
+                <!-- Butang Hantar -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
+                        🚀 Hantar Maklum Balas ke Pangkalan Data
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <script>
@@ -140,32 +173,42 @@
             }
         ];
 
+        // Navigasi Persetujuan
+        document.getElementById('btnAgree').addEventListener('click', function() {
+            document.getElementById('consent-section').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        });
+
         const container = document.getElementById('questionsContainer');
-        let globalQuestionCount = 1;
+        let questionDataMap = []; // Untuk simpan meta-data bagi submission
 
         // Render Soalan ke dalam HTML
         modulesData.forEach((mod, mIndex) => {
-            let modHTML = `<h2 class="module-title">${mod.title}</h2>`;
+            let modClass = `modul-${mIndex}`;
+            let modHTML = `<h2 class="module-title mt-5 text-uppercase" style="color: #333;">${mod.title}</h2>`;
             
             mod.questions.forEach((q, qIndex) => {
                 let optionsHTML = q.opts.map(opt => `<li>${opt}</li>`).join('');
-                let qId = `q${globalQuestionCount}`;
+                let qId = `mod${mIndex}_q${qIndex}`;
+                
+                // Simpan rujukan untuk API penghantaran
+                questionDataMap.push({ id: qId, modul: mod.title, soalan: `Soalan ${qIndex + 1}: ${q.q}` });
                 
                 modHTML += `
-                <div class="question-card">
-                    <h5>Soalan ${globalQuestionCount}</h5>
-                    <p class="mb-2">${q.q}</p>
+                <div class="question-card ${modClass}">
+                    <h5 class="fw-bold">Soalan ${qIndex + 1}</h5>
+                    <p class="mb-2 fw-medium">${q.q}</p>
                     <ul class="options-list">
                         ${optionsHTML}
                     </ul>
                     <p><span class="ans-badge">Jawapan: ${q.ans}</span></p>
                     
-                    <hr>
+                    <hr class="mt-4 mb-4" style="border-color: rgba(0,0,0,0.1);">
                     <div class="row">
                         <!-- Skala Relevan -->
                         <div class="col-md-4 mb-3">
                             <label class="form-label fw-bold mb-1">Skala Relevan (1-4):</label><br>
-                            <span class="scale-label d-block mb-2">1 = Tidak Relevan, 4 = Sangat Relevan</span>
+                            <span class="scale-label d-block mb-2">1 = Tdk Relevan, 4 = Sgt Relevan</span>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="${qId}_relevan" value="1" required> <label class="form-check-label">1</label>
                             </div>
@@ -173,7 +216,7 @@
                                 <input class="form-check-input" type="radio" name="${qId}_relevan" value="2"> <label class="form-check-label">2</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="3"> <label class="form-check-label">3</label>
+                                <input class="form-check-input" type="radio" name="${qId}_relevan" value="3" checked> <label class="form-check-label">3</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="${qId}_relevan" value="4"> <label class="form-check-label">4</label>
@@ -183,7 +226,7 @@
                         <!-- Skala Kejelasan -->
                         <div class="col-md-4 mb-3">
                             <label class="form-label fw-bold mb-1">Skala Kejelasan (1-4):</label><br>
-                            <span class="scale-label d-block mb-2">1 = Tidak Jelas, 4 = Sangat Jelas</span>
+                            <span class="scale-label d-block mb-2">1 = Tdk Jelas, 4 = Sgt Jelas</span>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="${qId}_jelas" value="1" required> <label class="form-check-label">1</label>
                             </div>
@@ -191,7 +234,7 @@
                                 <input class="form-check-input" type="radio" name="${qId}_jelas" value="2"> <label class="form-check-label">2</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="3"> <label class="form-check-label">3</label>
+                                <input class="form-check-input" type="radio" name="${qId}_jelas" value="3" checked> <label class="form-check-label">3</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="${qId}_jelas" value="4"> <label class="form-check-label">4</label>
@@ -200,52 +243,68 @@
 
                         <!-- Komen / Cadangan -->
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold mb-1">Komen / Cadangan (Pilihan):</label>
-                            <textarea class="form-control form-control-sm" name="${qId}_komen" rows="2" placeholder="Nyatakan sebab jika skala 1 atau 2 dipilih..."></textarea>
+                            <label class="form-label fw-bold mb-1">Komen / Cadangan:</label>
+                            <textarea class="form-control form-control-sm" name="${qId}_komen" rows="2" placeholder="Sila nyatakan jika ada cadangan..."></textarea>
                         </div>
                     </div>
                 </div>
                 `;
-                globalQuestionCount++;
             });
             container.innerHTML += modHTML;
         });
 
-        // Pengendalian Form Submit dan Download CSV
+        // -------------------------------------------------------------
+        // PENTING: Gantikan URL di bawah dengan 'Web app URL' GAS anda
+        // -------------------------------------------------------------
+        const scriptURL = 'LETAKKAN_URL_WEB_APP_DI_SINI';
+
         document.getElementById('validationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            let name = document.getElementById('evaluatorName').value.replace(/,/g, '');
-            let role = document.getElementById('evaluatorRole').value.replace(/,/g, '');
-            
-            // Header CSV
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Nama Penilai,Jawatan,No. Soalan,Skala Relevan (1-4),Skala Kejelasan (1-4),Komen/Cadangan\n";
-            
-            // Kumpul data dari form
+            // Tunjuk overlay loading
+            document.getElementById('loading-overlay').style.display = 'block';
+
             let formData = new FormData(this);
-            
-            for(let i = 1; i < globalQuestionCount; i++) {
-                let relevan = formData.get(`q${i}_relevan`);
-                let jelas = formData.get(`q${i}_jelas`);
-                let komen = formData.get(`q${i}_komen`) || "";
-                
-                // Hilangkan koma dan baris baru dalam komen supaya tidak merosakkan format CSV
-                komen = komen.replace(/,/g, ' ').replace(/(\r\n|\n|\r)/gm, " ");
-                
-                csvContent += `${name},${role},Soalan ${i},${relevan},${jelas},"${komen}"\n`;
-            }
-            
-            // Proses Muat Turun (Download)
-            var encodedUri = encodeURI(csvContent);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `Validasi_Soalan_${name.replace(/\s+/g, '_')}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            alert("Terima kasih! Fail penilaian (CSV) anda telah dimuat turun. Sila hantar fail tersebut kepada Urusetia Modul.");
+            let payload = {
+                nama: document.getElementById('evaluatorName').value,
+                jawatan: document.getElementById('evaluatorRole').value,
+                responses: []
+            };
+
+            // Kumpul semua jawapan berdasarkan peta soalan (questionDataMap)
+            questionDataMap.forEach(qData => {
+                payload.responses.push({
+                    modul: qData.modul,
+                    soalan: qData.soalan,
+                    relevan: formData.get(`${qData.id}_relevan`),
+                    jelas: formData.get(`${qData.id}_jelas`),
+                    komen: formData.get(`${qData.id}_komen`) || ""
+                });
+            });
+
+            // Hantar ke Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                // Guna text/plain untuk mengelakkan isu CORS preflight
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                if(data.status === 'success') {
+                    alert('Terima kasih! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
+                    // Refresh borang
+                    window.location.reload();
+                } else {
+                    alert('Ralat semasa menghantar. Sila hubungi urusetia.');
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                alert('Terdapat masalah rangkaian atau pautan Google Apps Script tidak tepat. Sila pastikan anda telah meletakkan URL yang betul pada fail index.html.');
+                console.error('Error!', error.message);
+            });
         });
     </script>
 </body>
