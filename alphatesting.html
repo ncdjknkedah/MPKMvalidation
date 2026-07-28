@@ -15,7 +15,7 @@
         .modul-3 { background-color: #ffebee; border-left: 5px solid #b71c1c; } /* Merah: Marah */
 
         .header-section { background-color: #0056b3; color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
-        .module-title { margin-top: 40px; margin-bottom: 15px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
+        .module-title { margin-top: 20px; margin-bottom: 15px; padding-bottom: 10px; font-weight: bold; border-bottom: 2px solid #ccc;}
         .objective-box { background-color: #fff; border-left: 4px solid #6c757d; padding: 15px; margin-bottom: 25px; border-radius: 0 5px 5px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .question-card { padding: 25px; margin-bottom: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .options-list { list-style-type: none; padding-left: 0; }
@@ -23,9 +23,11 @@
         .ans-badge { background-color: #343a40; color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
         .scale-label { font-size: 0.85em; color: #555; }
         
-        #main-content { display: none; }
+        #main-content, #progress-section { display: none; }
         .consent-card { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 6px solid #0056b3; }
         #loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; text-align: center; color: white; padding-top: 20vh; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -46,7 +48,7 @@
         
         <!-- Seksyen Borang Persetujuan (Consent) -->
         <div id="consent-section" class="consent-card">
-            <h3 class="text-center mb-4 text-primary">Borang Persetujuan Validator</h3>
+            <h3 class="text-center mb-4 text-primary">Borang Persetujuan Penilai</h3>
             <p>Terima kasih atas kesudian anda meluangkan masa untuk bersama-sama melakukan proses validasi ini.</p>
             <p><strong>Latar Belakang:</strong> Unit NCD Jabatan Kesihatan Negeri (JKN) Kedah sedang membangunkan Modul Interaktif Pembelajaran Kendiri berkaitan Kesihatan Mental. Sebanyak 4 tajuk modul sedang dibangunkan yang bertujuan untuk meningkatkan pengetahuan dan kefahaman staf di JKN Kedah. Berikut merupakan senarai dan objektif setiap modul:</p>
             
@@ -72,36 +74,18 @@
             </div>
         </div>
 
-        <!-- Seksyen Borang Utama (Tersembunyi pada awalnya) -->
+        <!-- Seksyen Bar Kemajuan (Progress Bar) -->
+        <div id="progress-section" class="mb-4">
+            <div class="progress" style="height: 25px; border-radius: 15px;">
+                <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success fw-bold" role="progressbar" style="width: 25%; font-size: 14px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Modul 1 daripada 4</div>
+            </div>
+        </div>
+
+        <!-- Seksyen Borang Utama -->
         <div id="main-content">
             <form id="validationForm">
-                
-                <!-- Maklumat Penilai -->
-                <div class="card mb-4 border-0 shadow-sm">
-                    <div class="card-body">
-                        <h4 class="card-title mb-3 text-primary">Maklumat Penilai</h4>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Nama Penuh:</label>
-                                <input type="text" class="form-control" id="evaluatorName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Jawatan:</label>
-                                <input type="text" class="form-control" id="evaluatorRole" placeholder="Cth: Pegawai Psikologi / Jururawat" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Kontena Dinamik untuk Soalan -->
                 <div id="questionsContainer"></div>
-
-                <!-- Butang Hantar -->
-                <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
-                        🚀 Hantar Maklum Balas ke Pangkalan Data
-                    </button>
-                </div>
             </form>
         </div>
 
@@ -186,22 +170,41 @@
             }
         ];
 
-        // Navigasi Persetujuan
-        document.getElementById('btnAgree').addEventListener('click', function() {
-            document.getElementById('consent-section').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-        });
-
+        let currentStep = 0;
+        const totalSteps = modulesData.length;
         const container = document.getElementById('questionsContainer');
         let questionDataMap = []; // Untuk simpan meta-data bagi submission
 
-        // Render Soalan ke dalam HTML
+        // Mula Render Soalan dan Pecahkan mengikut Modul (Pagination)
         modulesData.forEach((mod, mIndex) => {
             let modClass = `modul-${mIndex}`;
             
-            // Masukkan Tajuk dan Objektif Modul di atas
-            let modHTML = `
-                <div class="mt-5 mb-4">
+            // Set setiap modul ke dalam satu div berasingan. Hanya tunjuk div pertama sahaja pada permulaan.
+            let modHTML = `<div class="module-section" id="module-step-${mIndex}" style="display: ${mIndex === 0 ? 'block' : 'none'};">`;
+            
+            // Jika modul pertama, letak form "Maklumat Penilai" di atas sekali
+            if (mIndex === 0) {
+                modHTML += `
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3 text-primary">Maklumat Penilai</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Nama Penuh:</label>
+                                <input type="text" class="form-control" id="evaluatorName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Jawatan:</label>
+                                <input type="text" class="form-control" id="evaluatorRole" placeholder="Cth: Pegawai Psikologi / Jururawat" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // Tajuk & Objektif Modul
+            modHTML += `
+                <div class="mt-4 mb-4">
                     <h2 class="module-title text-uppercase" style="color: #333;">${mod.title}</h2>
                     <div class="objective-box">
                         <strong class="text-primary">Objektif Modul:</strong> ${mod.objective}
@@ -209,6 +212,7 @@
                 </div>
             `;
             
+            // Loop untuk soalan-soalan dalam modul ini
             mod.questions.forEach((q, qIndex) => {
                 let optionsHTML = q.opts.map(opt => `<li>${opt}</li>`).join('');
                 let qId = `mod${mIndex}_q${qIndex}`;
@@ -272,11 +276,73 @@
                 </div>
                 `;
             });
+
+            // Letak Butang Navigasi (Seterusnya / Kembali / Hantar) di hujung setiap modul
+            modHTML += `<div class="nav-buttons pb-4">`;
+            
+            if (mIndex > 0) {
+                modHTML += `<button type="button" class="btn btn-secondary btn-lg px-4 shadow" onclick="changeStep(${mIndex - 1})">⬅️ Kembali</button>`;
+            } else {
+                modHTML += `<div></div>`; // Spacer jika tiada butang kembali (modul 1)
+            }
+
+            if (mIndex < totalSteps - 1) {
+                modHTML += `<button type="button" class="btn btn-primary btn-lg px-5 shadow" onclick="changeStep(${mIndex + 1})">Seterusnya ➡️</button>`;
+            } else {
+                modHTML += `<button type="submit" class="btn btn-success btn-lg px-5 shadow">🚀 Hantar Maklum Balas</button>`;
+            }
+
+            modHTML += `</div></div>`; // Penutup div navigasi dan div module-section
+            
             container.innerHTML += modHTML;
         });
 
+        // Fungsi Navigasi antara Modul
+        window.changeStep = function(newStep) {
+            // Validasi ringkas: Pastikan nama dan jawatan diisi sebelum pindah dari Modul 1
+            if (currentStep === 0 && newStep > 0) {
+                let name = document.getElementById('evaluatorName').value.trim();
+                let role = document.getElementById('evaluatorRole').value.trim();
+                
+                if (!name || !role) {
+                    alert("Sila isi Nama Penuh dan Jawatan anda terlebih dahulu sebelum meneruskan penilaian.");
+                    document.getElementById(!name ? 'evaluatorName' : 'evaluatorRole').focus();
+                    return;
+                }
+            }
+
+            // Sembunyikan modul semasa
+            document.getElementById(`module-step-${currentStep}`).style.display = 'none';
+            
+            // Paparkan modul baru
+            currentStep = newStep;
+            document.getElementById(`module-step-${currentStep}`).style.display = 'block';
+            
+            // Kemas kini Progress Bar
+            updateProgressBar();
+            
+            // Tatal (scroll) automatik ke bahagian atas halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Fungsi Kemas Kini Progress Bar
+        function updateProgressBar() {
+            let percentage = ((currentStep + 1) / totalSteps) * 100;
+            let pBar = document.getElementById('progress-bar');
+            pBar.style.width = `${percentage}%`;
+            pBar.setAttribute('aria-valuenow', percentage);
+            pBar.innerText = `Modul ${currentStep + 1} daripada ${totalSteps}`;
+        }
+
+        // Navigasi dari Skrin Persetujuan (Consent) ke Modul 1
+        document.getElementById('btnAgree').addEventListener('click', function() {
+            document.getElementById('consent-section').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'block';
+            document.getElementById('main-content').style.display = 'block';
+        });
+
         // -------------------------------------------------------------
-        // PENTING: Gantikan URL di bawah dengan 'Web app URL' GAS anda
+        // URL Google Apps Script
         // -------------------------------------------------------------
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwAe0dIeolPGJBrkPonGa8UnaRneLf2D_KMVKcsqFhuUs0qxhH7R0CsBgM1OPcROcNt/exec';
 
@@ -307,7 +373,6 @@
             // Hantar ke Google Apps Script
             fetch(scriptURL, {
                 method: 'POST',
-                // Guna text/plain untuk mengelakkan isu CORS preflight
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
                 body: JSON.stringify(payload)
             })
@@ -316,7 +381,6 @@
                 document.getElementById('loading-overlay').style.display = 'none';
                 if(data.status === 'success') {
                     alert('Terima kasih atas penilaian anda! Maklum balas anda telah berjaya dihantar ke pangkalan data.');
-                    // Refresh borang
                     window.location.reload();
                 } else {
                     alert('Ralat semasa menghantar. Sila hubungi urusetia.');
@@ -324,7 +388,7 @@
             })
             .catch(error => {
                 document.getElementById('loading-overlay').style.display = 'none';
-                alert('Terdapat masalah rangkaian atau pautan Google Apps Script tidak tepat. Sila pastikan anda telah meletakkan URL yang betul pada fail index.html.');
+                alert('Terdapat masalah rangkaian atau pautan Google Apps Script tidak tepat. Sila pastikan anda telah meletakkan URL yang betul.');
                 console.error('Error!', error.message);
             });
         });
